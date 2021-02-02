@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+    </style>
+
+    <!-- Profil -->
+    <section>
+        <div class="-mt-4">
+            {% include('profil.html.twig') %}
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                    <div class="flex items-center">
+                        <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                    <div class="container mx-auto px-6 py-8">
+                        <h3 class="text-gray-700 text-3xl font-medium">Validation rendez-vous</h3>
+
+                        <div class="mt-4 bg-white rounded">
+                            <div class="container mx-auto text-center">
+                                <article class="py-12 px-4 ml-4">
+                                    <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Rendez-vous pour un {{ type }} .</h1>
+
+                                    <div class="max-w-3xl mx-auto">
+                                        <p class="mb-4">Il vous faut maintenant valider votre choix pour créer une demande de rendez-vous. </p>
+                                        <p class="mb-4 text-rouge">Une fois votre rendez-vous pris, il faut encore qu'il soit validé par le responsable du site, vous pourrez voir
+                                            l'état de
+                                            votre rendez-vous dans "Mes rendez-vous" qui se trouve dans votre profil !</p>
+                                        <hr>
+                                        <div class="mt-5">
+                                            {% if app.user.Majeur == false %}
+                                                <p class="mb-4 text-lg text-rouge">Tu n'es pas majeur il te faudra une autorisation parentale,
+                                                Tu devra venir accompagner avec un parent !</p>
+                                            {% else %}
+                                                <p class="mb-4 text-lg text-vert">Tu est majeur, il ne te reste qu'a remplir le formulaire !</p>
+                                            {% endif %}
+                                            {% if form is not empty %}
+                                                {{ form_start(form) }}
+                                                <p>Vous avez choisi de prendre rendez-vous le {{ date }} à {{ heure }}.</p>
+                                                {% if form.partieCorps is defined and  form.allergie is defined %}
+                                                    {{ form_widget(form.partieCorps, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2
+                                                     px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                                        "placeholder": "Indique la partie du corps."}}) }}
+
+                                                    {% if form.taille is defined %}
+                                                    {{ form_widget(form.taille,
+                                                        {'attr': {'class': 'shadow appearance-none border rounded w-full py-2
+                                                     px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                                            "placeholder": "Indique la taille du tatouage."}}) }}
+                                                        {% endif %}
+
+                                                    {{ form_widget(form.allergie,
+                                                        {'attr': {'class': 'shadow appearance-none border rounded w-full py-2
+                                                     px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                                            "placeholder": "Indique pourquoi vous souhaitez prendre rendez-vous."}}) }}
+                                                {% endif %}
+                                                {{ form_widget(form.message,
+                                                    {'attr': {'class': 'shadow appearance-none border rounded w-full py-2
+                                                     px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                                        "placeholder": "Indiqué pourquoi vous souhaitez prendre rendez-vous."}}) }}
+                                                {{ form_widget(form.submit,{
+                                                    "label": "Envoyer",
+                                                     'attr': {'class': 'shadow appearance-none border rounded w-full py-2
+                                                     px-3 text-gray-700 bg-nav-dark hover:bg-btnBack hover:text-white mt-1 leading-tight focus:outline-none focus:shadow-outline'}}) }}
+                                                {{ form_end(form) }}
+                                                {% if erreur %}
+                                                    {{ erreur }}
+                                                {% endif %}
+                                            {% else %}
+                                            <p>Pas de réservation pour le moment !</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <a class="rounded px-2 py-1 bg-nav-light hover:bg-btnBack hover:text-white" href="{{ path("days", {'jour': jour})
+                                        }}">Revenir au choix
+                                            de l'heure.</a>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}

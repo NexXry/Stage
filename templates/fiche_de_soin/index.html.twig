@@ -1,0 +1,311 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche de soin{% endblock %}
+
+{% block body %}
+<style>
+</style>
+
+    <!-- Header with image -->
+    <section class="w-full mt-16">
+        <div class="w-full  bg-gray-500 bg-no-repeat" style="
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-image: url('https://likemagicenergyhealing.com/wp-content/themes/LikeMagicEnergyHealing/images/inner-hdr.jpg');
+">
+            <div class=" p-10  py-20  flex  flex-col  flex-wrap  justify-center  content-center">
+                <div class=" m-0  p-0  text-5xl  text-white  antialiased  text-center">Les Fiches de soin !</div>
+                <div class=" m-0  p-0  text-xl  text-white  antialiased  text-center"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Header with image -->
+
+    <!-- I need Healing -->
+    <section class="w-full flex flex-wrap justify-around bg-yellow-50">
+        <article class="py-12 px-4 ml-4">
+            <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Fiche pour un Tatouage</h1>
+
+            <div class="max-w-3xl mx-auto">
+                <p class="mb-4">We offer a dependable and quick supply of copy paper suited to all kinds of printers. Each of our various products is designed to provide the finest performance and meet international standards.</p>
+                <p class="mb-4">We’re dedicated to ensure the highest level of customer satisfaction based on long-term professional relationships. By creating the positive working environment we’re enabling our employees to significantly improve not only their productivity, but what’s more important – job satisfaction.</p>
+                <ul class="mb-4 list-inside list-disc">
+                    <li>High durability</li>
+                    <li>Value-based price</li>
+                    <li>Perfect performance on copy machines</li>
+                    <li>Long lasting whiteness</li>
+                </ul>
+                <p class="mb-10">We deliver our services with passion and dedication unmatched by other so called “big players”. We create a friendly environment for our workers and that’s what makes their dedication soar to the maximum. You are getting not only the best possible product, but also our love for paper (completely free of charge).</p>
+                <hr>
+            </div>
+        </article>
+        <article class="py-12 px-4 mr-4">
+            <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Fiche pour un piercing</h1>
+
+            <div class="max-w-3xl mx-auto">
+                <p class="mb-4">We offer a dependable and quick supply of copy paper suited to all kinds of printers. Each of our various products is designed to provide the finest performance and meet international standards.</p>
+                <p class="mb-4">We’re dedicated to ensure the highest level of customer satisfaction based on long-term professional relationships. By creating the positive working environment we’re enabling our employees to significantly improve not only their productivity, but what’s more important – job satisfaction.</p>
+                <ul class="mb-4 list-inside list-disc">
+                    <li>High durability</li>
+                    <li>Value-based price</li>
+                    <li>Perfect performance on copy machines</li>
+                    <li>Long lasting whiteness</li>
+                </ul>
+                <p id="rea" class="mb-10">We deliver our services with passion and dedication unmatched by other so called “big players”. We create a friendly environment for our workers and that’s what makes their dedication soar to the maximum. You are getting not only the best possible product, but also our love for paper (completely free of charge).</p>
+                <hr>
+            </div>
+        </article>
+
+        <!-- lg table -->
+        <article class="mb-10 hidden lg:block">
+            <table class="bg-white w-11/12">
+                <thead>
+                <tr>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">PIERCING</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Durée d'inflammation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Délai de cicatrisation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Télécharger la fiche associer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Lobe</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">7 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_lobe.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Cartilage</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_cartilage.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Conche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 à 2 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_cartilage.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Arcade</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_lobe.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Narine</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">15 à 20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_nez.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Septum</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_septum.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Nombril</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 à 12 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_nombril.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Sein</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 à 12 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_teton.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Labret, médusa, mouche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_labret-medusa-mouche.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Langue</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">10 à 15 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="/uploads/heal/PERCIKOPAT_feuille-soins_langue-frein.pdf" target="_blank">Télécharger</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+        <!-- lg table -->
+
+        <!-- md table -->
+        <article class="mb-10  hidden md:block lg:hidden">
+            <table class="bg-white w-11/12">
+                <thead>
+                <tr>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">PIERCING</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Durée d'inflammation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Délai de cicatrisation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Télécharger la fiche associer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white lg:hover:bg-gray-md:block100 flex table-row flex-row flex-row flex-wrap flex-no-wrap mb-10 mb-0">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Lobe</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">7 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Cartilage</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Conche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 à 2 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">6 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Arcade</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Narine</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">15 à 20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Septum</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Nombril</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">6 à 12 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Sein</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">6 à 12 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Labret, médusa, mouche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">Langue</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">10 à 15 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static">1 mois ½</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </article>
+        <!-- md table -->
+
+        <!-- sm table -->
+        <article class="mb-10 md:hidden sm:block lg:hidden">
+            <table class="bg-white">
+                <thead>
+                <tr class="flex flex-col">
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  table-cell">PIERCING</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  table-cell">Durée d'inflammation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  table-cell">Délai de cicatrisation</th>
+                    <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300  table-cell">Télécharger la fiche associer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Lobe</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">7 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Cartilage</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Conche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 à 2 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Arcade</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Narine</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">15 à 20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Septum</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Nombril</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 à 12 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Sein</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">6 à 12 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Labret, médusa, mouche</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">20 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">4 mois</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                <tr>
+                    <td class="w-full mt-5 lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">Langue</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">10 à 15 jours</td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">1 mois ½</td>
+                                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static"><a href="">Télécharger</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </article>
+        <!-- sm table -->
+
+    </section>
+    <!-- I need Healing -->
+
+{% endblock %}

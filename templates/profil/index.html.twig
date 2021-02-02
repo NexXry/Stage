@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+</style>
+
+    <!-- Profil -->
+    <section>
+        <div class="-mt-4">
+            {% include('profil.html.twig') %}
+                <div class="flex-1 flex flex-col overflow-hidden">
+                    <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                        <div class="flex items-center">
+                            <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                        <div class="container mx-auto px-6 py-8">
+                            <h3 class="text-gray-700 text-3xl font-medium">Profil</h3>
+
+                            <div class="mt-4 bg-white rounded">
+                                <div class="container mx-auto text-center">
+                                    <article class="py-12 px-4 ml-4">
+                                        <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Bienvenue {{ app.user.username }}</h1>
+
+                                        <div class="max-w-3xl mx-auto">
+                                            <p class="mb-4">Vous êtes actuellement sur votre profil, vous pouvez  le : consulter/modifier.  </p>
+                                            <ul class="mb-4 list-inside list-disc">
+                                                <li>Nom et Prénom : {{ app.user.username }}</li>
+                                                <li>Mail: {{ app.user.mail }}</li>
+                                                <li>Numéro de téléphone : {{ app.user.telephone }}</li>
+                                            </ul>
+                                           <hr>
+                                        </div>
+                                        <div class="mt-5">
+                                            <a class="rounded px-2 py-1 bg-nav-dark hover:bg-btnBack hover:text-white" href="{{ path("profil-modifier", {"id": app.user.id}) }}">Modifier mes information</a>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

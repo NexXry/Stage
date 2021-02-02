@@ -1,0 +1,209 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<section>
+    <div class="-mt-4">
+        {% include('backOffice.html.twig') %}
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                <div class="flex items-center">
+                    <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                <div class="container mx-auto px-6 py-8">
+                    <h3 class="text-gray-700 text-3xl font-medium">Administration</h3>
+
+                    <div class="mt-4 bg-white rounded">
+                        <div class="container mx-auto text-center">
+                            <article class="py-12 px-4 ml-4">
+                                <h1 class="text-2xl text-center mb-4 font-semibold font-heading font-semibold">Dernier mouvement sur le site.</h1>
+                                <hr>
+                                <h2 class="text-xl text-center mb-4 font-semibold font-heading font-semibold">La dernière demande de rendez-vous.</h2>
+                                <div class="mt-5">
+                                    <p class="text-lg">Dernière demande de rendez-vous.</p>
+                                    {% if lastRdv is not empty %}
+                                        <div class="p-2">
+                                            <div class="flex flex-col flex-wrap w-8/12 mx-auto justify-center bg-white leading-none text-textC rounded p-2 shadow text-sm">
+                                                <span class="mt-5 inline-flex
+                                                        bg-yellow-100 text-textC text-white rounded-full h-6 justify-center items-center text-">Nom du client : {{ client.nom
+                                                    }} {{ client.prenom }}</span>
+                                                    <span class="mt-5 inline-flex
+                                                        bg-yellow-100  text-textC text-white rounded-full h-6 px-3 justify-center items-center text-">
+                                                        Date du rdv : le {{ lastRdv.0.date_reservation | date("d m Y") }} à {{ lastRdv.0.date_reservation | date("H") }}H </span>
+                                                <span class="mt-5 inline-flex bg-yellow-100  text-textC text-white rounded-full h-6 px-3 justify-center items-center ">
+                                                       Etat : {{ lastRdv.0.etat }}</span>
+                                                <span  class="mt-5 inline-flex bg-yellow-100  text-textC text-white rounded-full h-6 px-3 justify-center items-center text-">
+                                                                        <span class="text-textC">Pour un {% if lastRdv.0.taille is empty %} Piercing {% else %} Tatouage {% endif %} </span>
+                                                </span>
+                                                <span  class="mt-5 inline-flex bg-yellow-100  text-textC text-white rounded-full h-6 px-3 justify-center items-center text-">
+                                                                        <span class="text-textC">Partie du corps : {{ lastRdv.0.partie_corps }}</span>
+                                                </span>
+                                                <span class="mt-5 text-center px-2">à propos
+                                                        de : {{ lastRdv.0.message }}</span>
+                                                <div class="m-5 flex flex-wrap mx-auto">
+                                                    <a class="m-5 rounded bg-vert duration-400 ease hover:bg-btnBack text-white px-3 py-2" href="{{ path('back_office_VV',
+                                                        {"id": lastId }) }}">Accecptez le rendez-vous</a>
+                                                    <a class="m-5 rounded bg-indigo-600 duration-400 ease hover:bg-btnBack text-white px-3 py-2" href="{{ path
+                                                        ('back_office_AA', {"id": lastId}) }}">Annulez le rendez-vous</a>
+
+                                                    <a class="m-5 rounded bg-rouge duration-400 ease hover:bg-btnBack text-white px-3 py-2" href="{{ path
+                                                        ('back_office_SUP', {"id": lastId}) }}">Suprimer le rendez-vous</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <p>vous n'avez pas de rendez-vous pour le moment!</p>
+                                    {% endif %}
+                                </div>
+
+                                <hr>
+                                <h2  class="text-xl text-center mb-4 font-semibold font-heading font-semibold">Les réalisations.</h2>
+
+                                <div class="mt-5">
+                                    <p class="text-lg">Voici les réalisations que vous avez ajoutées.</p>
+                                    {% if rea is not empty %}
+                                        <div class="p-2">
+                                            <div class="flex flex-row flex-wrap">
+                                                {% for realis in rea %}
+                                                <div class="w-60 h-1/6">
+                                                    <img class="m-4 p-4" src="/uploads/rea/{{ realis.image }}" alt="">
+                                                    <a class="bg-nav-light hover:bg-btnBack hover:text-white py-1 px-2 rounded" href="{{ path("back_office_gestionPhotoDel",
+                                                        {"id": realis.id})
+                                                    }}">Supprimer la Réalisation</a>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <p>vous n'avez pas de réalisation pour le moment!</p>
+                                    {% endif %}
+                                </div>
+
+                                <hr>
+                                <h2  class="text-xl text-center mb-4 font-semibold font-heading font-semibold">Les Produits.</h2>
+
+                                <div class="mt-5">
+                                    <p class="text-lg">Voici les Produits que vous avez ajoutés.</p>
+                                    {% if produit is not empty %}
+                                        <div class="p-2">
+                                            <div class="flex flex-row flex-wrap">
+                                                <a href="{{ path("back_office_allP") }} " class="px-5 py-2 border-blue-500 border text-indigo-500 rounded
+                                                   transition duration-300 hover:bg-indigo-500
+                                                   hover:text-white focus:outline-none"">Tous les produits</a>
+                                                {% for prod in produit %}
+                                                    {% if prod.quantite > 0 %}
+                                                    <div class="w-60 m-4 h-1/6">
+                                                        <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                                                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('/uploads/products/{{ prod.image }}')">
+                                                            <a href="{{ path("back_office_produitDel",{"id": prod.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4
+                                                            hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                <i class="far fa-trash-alt"></i>
+                                                            </a>
+                                                            <a href="{{ path("back_office_ajout_produitMod",{"id": prod.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4 hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                <i class="far fa-edit"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="px-5 py-3">
+                                                            <h3 class="text-gray-700 uppercase">{{ prod.nom }}</h3>
+                                                            <span class="text-gray-500 mt-2">Prix :{{ prod.prix }} €</span>
+                                                            <span class="text-gray-500 mt-2">Quantité :{{ prod.quantite }}</span>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <p>vous n'avez pas de réalisation pour le moment!</p>
+                                    {% endif %}
+                                </div>
+                                <hr>
+                                <h2  class="text-xl text-center mb-4 font-semibold font-heading font-semibold">Les Articles.</h2>
+
+                                <div class="mt-5">
+                                    <p class="text-lg">Voici les Articles que vous avez ajoutées.</p>
+                                    {% if article is not empty %}
+                                        <div class="p-2">
+                                            <div class="flex flex-row flex-wrap">
+                                                {% for art in article %}
+                                                    <div class="w-2/5 m-4 h-1/6">
+                                                        <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                                                            <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('/uploads/articles/{{ art
+                                                            .image }}')">
+                                                                <a href="{{ path("back_office_ajout_articleDel",{"id": art.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4
+                                                            hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                    <i class="far fa-trash-alt"></i>
+                                                                </a>
+                                                                <a href="{{ path("back_office_ajout_articleMod",{"id": art.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4 hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                    <i class="far fa-edit"></i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="px-5 py-3">
+                                                                <h3 class="text-gray-700 uppercase">{{ art.titre }}</h3>
+                                                                <span class="text-gray-500  mt-2"><p class="h-20 overflow-x-hidden break-words overflow-y-scroll">{{ art.description
+                                                                        }}</p></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <p>vous n'avez pas de réalisation pour le moment!</p>
+                                    {% endif %}
+                                </div>
+
+
+                                <hr>
+                                <h2  class="text-xl text-center mb-4 font-semibold font-heading font-semibold">Achat client.</h2>
+
+                                <div class="mt-5 ">
+                                    <p class="text-lg">Voici le dernier achat .</p>
+                                    {% if achat is not empty %}
+                                        <div class="p-2">
+                                            <div class="flex flex-row flex-wrap justify-around">
+                                        {% for ach in achat%}
+                                                <div class="w-60 m-4 h-1/6">
+                                                    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+                                                        <div class="flex items-end justify-end h-56 w-full bg-cover" style="background-image: url('/uploads/products/{{ ach.image }}')">
+                                                        </div>
+                                                        <div class="px-5 py-3">
+                                                            <h3 class="text-gray-700 break-words uppercase">Numéro : {{ ach.id_commande }}</h3>
+                                                            <span class="text-gray-500  mt-2"><p class="">{{ ach.payment_amount }} €</p></span>
+                                                            <span class="text-gray-500  mt-2"><p class="break-words">Date : {{ ach.date_achat }}</p></span>
+                                                            <span class="text-gray-500  mt-2"><p class="break-words">Commander par : {{ ach.nom }} {{ ach.prenom }}  </p></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <p>vous n'avez pas d'achat pour le moment!</p>
+                                    {% endif %}
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock %}

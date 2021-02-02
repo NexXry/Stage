@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Profil de {% if app.user %}{{ app.user.username }} {% endif %}{% endblock %}
+
+
+{% block body %}
+<style>
+</style>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <!-- Profil -->
+    <section>
+        <div class="mt-10">
+            {% include('profil.html.twig') %}
+                <div class="flex-1 flex flex-col overflow-hidden">
+                    <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                        <div class="flex items-center">
+                            <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                        <div class="container mx-auto px-6 py-8">
+                            <h3 class="text-gray-700 text-3xl font-medium">Profil</h3>
+
+                            <div class="mt-4 bg-white rounded">
+                                <div class="container mx-auto w-3/4 p-5 text-center">
+                                    <h3 class="text-gray-700 text-3xl font-medium">Formulaire de modification d'information</h3>
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form.nom, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline' ,
+                                        'placeholder': 'Votre Nom' }}) }}
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                        'placeholder': 'Votre Prenom'}}) }}
+                                    {{ form_widget(form.telephone, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                        'placeholder': 'Votre Numéro de téléphone'}}) }}
+
+                                    {{ form_widget(form.Majeur, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none
+                                    focus:shadow-outline',
+                                        'placeholder': 'Votre Numéro de téléphone'}}) }}
+
+                                    {{ form_widget(form.mail, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                        'placeholder': 'Votre Adresse mail'}}) }}
+                                    {{ form_widget(form.password, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline',
+                                        'placeholder': 'Votre Mot de passe'}}) }}
+                                    <input type="submit" value="Modifier" class="bg-nav-light rounded text-textC font-bold text-lg hover:bg-nav-dark p-2 mt-8">
+                                    {% for er in error %}
+                                        {{ er }} <br>
+                                    {% endfor %}
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

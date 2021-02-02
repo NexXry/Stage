@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+    <style>
+    </style>
+    <section>
+        <div class="-mt-4">
+            {% include('profil.html.twig') %}
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                    <div class="flex items-center">
+                        <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                    <div class="container mx-auto px-6 py-8">
+                        <h3 class="text-gray-700 text-3xl font-medium">Réservation</h3>
+
+                        <div class="mt-4 bg-white rounded">
+                            <div class="container mx-auto text-center">
+                                <article class="py-12 px-4 ml-4">
+                                    <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Bienvenue {{ app.user.username }}</h1>
+
+                                    <div class="max-w-3xl mx-auto">
+                                        <p class="mb-4">Vous êtes actuellement sur la page de réservation, vous avez la possibilité de prendre un rendez-vous (En vue d'un tatouage ou tout autre projet en rapport avec L'entreprise). </p>
+                                        <p class="xl:hidden lg:hidden md:hidden sm:hidden block">Cliquer pour <i class="fas fa-business-time"></i> pour réserver</p>
+                                        <hr class="mt-10">
+                                        {% if reservations %}
+                                        {% for reserv in reservations %}
+                                            <div class="p-2">
+                                                <div class="flex flex-wrap justify-center bg-white leading-none text-textC rounded-full p-2 shadow text-sm">
+                                                    <span class="mt-5 rounded inline-flex {% if reserv.Etat ==
+                                                        "attente"  %}bg-indigo-400 {% elseif reserv.Etat == "annuler" %} bg-rouge {% elseif reserv.Etat == "valider" %}
+                                                        bg-nav-light text-textC {%
+                                                        endif
+                                                    %} text-white rounded-4xl h-6 px-3 justify-center items-center text-">{% if reserv.Etat ==
+                                                            "attente"  %}En Attente {% elseif reserv.Etat == "annuler" %} Refusé {% elseif reserv.Etat == "valider" %} Valider {% endif %}</span>
+                                                    <span class="mt-5 inline-flex px-2">Votre demande de rendez-vous pour le {{ reserv.DateReservation | date('d:m:Y H') }}h à propos
+                                                        de : {{ reserv.message }}</span>
+                                                    {% if resId is not empty %}
+                                                    <a class="mt-5 mb-5 rounded bg-rouge hover:bg-btnBack text-white px-2 py-1" href="{{ path("annuler", {"id": resId})
+                                                    }}">Supprimer
+                                                        le
+                                                        rendez-vous</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        {% else %}
+                                        <p class="mb-4">Aucun rendez-vous en cours !</p>
+                                        {% endif %}
+                                        <hr class="mb-10">
+                                        <div class="lg:-ml-10 ">
+                                            <table class="sm:w-11/12 lg:w-full">
+                                                <thead>
+                                                <tr>
+                                                    <th class="p-2 border-r border-l border-t h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                                                        <span class="xl:block lg:block md:block sm:block hidden">Mardi</span>
+                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Mard</span>
+                                                    </th>
+                                                    <th class="p-2 border-r border-l border-t h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                                                        <span class="xl:block lg:block md:block sm:block hidden">Mercredi</span>
+                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Mer</span>
+                                                    </th>
+                                                    <th class="p-2 border-r border-l border-t h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                                                        <span class="xl:block lg:block md:block sm:block hidden">Jeudi</span>
+                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Jeu</span>
+                                                    </th>
+                                                    <th class="p-2 border-r border-l border-t h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                                                        <span class="xl:block lg:block md:block sm:block hidden">Vendredi</span>
+                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Ven</span>
+                                                    </th>
+                                                    <th class="p-2 border-r border-l border-t h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                                                        <span class="xl:block lg:block md:block sm:block hidden">Samedi</span>
+                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sam</span>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                <tr class="text-center h-20">
+                                                    {% for days in date %}
+                                                        {% if Current > days %}
+                                                            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-30 w-10 overflow-auto transition duration-500 ease bg-gray-400">
+                                                                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                                                                    <div class="top h-5 w-full">
+                                                                        <span class="text-white">{{ days }}</span>
+                                                                        <p class="leading-loose h-36 py-1 w-full text-red-100 px-5 py-1 rounded"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        {% else %}
+                                                            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-btnBack">
+                                                                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 mx-auto overflow-hidden">
+                                                                    <div class="top h-5 w-11/12">
+                                                                        <span class="text-gray-500">{{ days }}</span>
+                                                                    </div>
+                                                                    <a class="leading-loose h-36 py-1 w-11/12 cursor-pointer  hover:text-white  px-5 py-1 rounded"
+                                                                       href="{{ path("days", {"jour": days, }) }}"><span class="xl:block lg:block md:block sm:block
+                                                                       hidden">Cliquer pour Réserver <i class="fas fa-business-time"></i></span>
+                                                                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block"><i class="fas fa-business-time"></i></span>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </tr>
+                                                <tr class="text-center h-20">
+                                                    {% for Ndays in Nextdate %}
+                                                        <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-btnBack">
+                                                            <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 mx-auto overflow-hidden">
+                                                                <div class="top h-5 w-11/12">
+                                                                    <span class="text-gray-500">{{ Ndays }}</span>
+                                                                </div>
+                                                                <a class="leading-loose h-36 py-1 w-11/12 cursor-pointer  hover:text-white  px-5 py-1 rounded"
+                                                                   href="{{ path("days", {"jour": Ndays}) }}"><span class="xl:block lg:block md:block sm:block hidden">Cliquer pour Réserver <i class="fas fa-business-time"></i></span>
+                                                                    <span class="xl:hidden lg:hidden md:hidden sm:hidden block"><i class="fas fa-business-time"></i></span>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    {% endfor %}
+                                                </tr>
+                                                <tr class="text-center h-20">
+                                                    {% for key , Adays in Another %}
+                                                        <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-btnBack">
+                                                            <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-11/12 w-10 mx-auto overflow-hidden">
+                                                                <div class="top h-5 w-11/12">
+                                                                    <span class="text-gray-500">{{ Adays.Jours }}</span>
+                                                                </div>
+                                                                <a class="leading-loose h-36 py-1 w-11/12 cursor-pointer  hover:text-white  px-5 py-1 rounded"
+                                                                   href="{{ path("days", {"jour": Adays.Jours }) }}"><span class="xl:block lg:block md:block sm:block hidden">Cliquer pour Réserver <i class="fas fa-business-time"></i></span>
+                                                                    <span class="xl:hidden lg:hidden md:hidden sm:hidden block"><i class="fas fa-business-time"></i></span>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    {% endfor %}
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

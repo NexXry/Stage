@@ -1,0 +1,747 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salon{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+
+        [type="checkbox"] {
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        .form-checkbox {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            flex-shrink: 0;
+            color: currentColor;
+            background-color: #fff;
+            border-color: #e2e8f0;
+            border-width: 1px;
+            border-radius: 0.25rem;
+            height: 1.2em;
+            width: 1.2em;
+        }
+
+        .form-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .animated.faster {
+            -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+        }
+
+        .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+
+        .fadeOut {
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #myImg:hover {opacity: 0.7;}
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content (Image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image (Image Text) - Same Width as the Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation - Zoom in the Modal */
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+            .close {
+                position: absolute;
+                top: 0px;
+                right: 15px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+        }
+    </style>
+
+    <!-- Header with image -->
+    <section class="w-full mt-16">
+        <div class="w-full  bg-gray-500 bg-no-repeat" style="
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-image: url('https://salvationtattoos.co.uk/wp-content/uploads/2018/03/Salvation-webpage-header.jpg');
+">
+            <div class=" p-10  py-20  flex  flex-col  flex-wrap  justify-center  content-center">
+                <div class=" m-0  p-0  text-5xl  text-white  antialiased  text-center">Bienvenue dans le {{ app.request.get('_route') }} !</div>
+                <div class=" m-0  p-0  text-xl  text-white  antialiased  text-center"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Header with image -->
+
+    <!-- separator + call to action -->
+    <section>
+        <div class="bg-yellow-50">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    <span class="block text-2xl">Vous avez une idée de tatouage ou de piercing ?</span>
+                    <span class="block text-textC">Vous pouvez prendre rendez-vous en quelque click </span>
+                </h2>
+                <div class="mt-8 lex lg:mt-0 lg:flex-shrink-0">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="{% if app.user %}{{ path('reservation') }} {% else %} {{ path('app_login')}} {% endif %}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-textC bg-nav-dark hover:bg-btnBack hover:text-white">
+                            Prendre rendez-vous
+                        </a>
+                    </div>
+                    <div class="ml-3 inline-flex rounded-md shadow">
+                        <a href="#contact" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-textC
+                        bg-nav-original hover:bg-white hover:text-btnBack">
+                            Plus d'info !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- separator + call to action -->
+
+    <!-- hero componant -->
+    <section>
+        <style>
+            .bg-dots{
+                background-image: url(https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5dea7a12bb83ab1f13040de5_cx-dots.svg);
+                background-repeat: no-repeat
+            }
+        </style>
+
+        <div class="m-auto max-w-6xl p-12">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 max-w-md flex flex-col justify-center">
+                    <div class="md:text-5xl text-2xl uppercase font-black text-nav-dark">Bienvenue dans l'univers de LD Tatouages & Piercing</div>
+                    <div class="text-xl mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    <div class="my-5 h-16">
+                        <div class="shadow-md font-medium py-2 text-yellow-100
+               cursor-pointer bg-yellow-600 hover:bg-yellow-500 rounded text-lg text-center w-48" onclick="openModal()">Les tarifs</div>
+                    </div>
+                    <!--Start modal-->
+                    <div class="main-modal fixed h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
+                        <div class="border border-teal-500 shadow-lg modal-container w-9/12 bg-white h-5/6 sm:max-w-full mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                            <div class="modal-close absolute right-1/6 m-6 cursor-pointer z-50" style="">
+                                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                     viewBox="0 0 18 18">
+                                    <path
+                                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="text-center">
+                                <!--Title-->
+                                <!--Body-->
+                                <div class="mx-auto my-3 w-max">
+                                    <div class="container mx-auto py-6" x-data="datatables()" x-cloak>
+                                        <h1 class="text-3xl py-4 border-b mb-10">La grille des tarifs</h1>
+
+                                        <div x-show="selectedRows.length" class="bg-teal-200 fixed top-0 left-0 right-0 z-40 w-full shadow">
+                                            <div class="container mx-auto px-4 py-4">
+                                                <div class="flex md:items-center">
+                                                    <div class="mr-4 flex-shrink-0">
+                                                        <svg class="h-8 w-8 text-teal-600"  viewBox="0 0 20 20" fill="currentColor">  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                                    </div>
+                                                    <div x-html="selectedRows.length + ' rows are selected'" class="text-teal-800 text-lg"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4 flex justify-between items-center">
+                                            <div class="flex-1 pr-4">
+                                                <div class="relative md:w-1/3">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="shadow rounded-lg flex">
+                                                    <div class="relative">
+                                                        <button @click.prevent="open = !open"
+                                                                class="rounded-lg inline-flex items-center bg-white hover:text-blue-500 focus:outline-none focus:shadow-outline text-gray-500 font-semibold py-2 px-2 md:px-4">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:hidden" viewBox="0 0 24 24"
+                                                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                                                 stroke-linejoin="round">
+                                                                <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                                                                <path
+                                                                        d="M5.5 5h13a1 1 0 0 1 0.5 1.5L14 12L14 19L10 16L10 12L5 6.5a1 1 0 0 1 0.5 -1.5" />
+                                                            </svg>
+                                                            <span class="hidden md:block">Affichages</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" width="24" height="24"
+                                                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                                 stroke-linecap="round" stroke-linejoin="round">
+                                                                <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+                                                                <polyline points="6 9 12 15 18 9" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <div x-show="open" @click.away="open = false"
+                                                             class="z-40 absolute top-0 right-0 w-40 bg-white rounded-lg shadow-lg mt-12 -mr-1 block py-1 overflow-hidden">
+                                                            <template x-for="heading in headings">
+                                                                <label
+                                                                        class="flex justify-start items-center text-truncate hover:bg-gray-100 px-4 py-2">
+                                                                    <div class="text-teal-600 mr-3">
+                                                                        <input type="checkbox" class="form-checkbox focus:outline-none focus:shadow-outline" checked @click="toggleColumn(heading.key)">
+                                                                    </div>
+                                                                    <div class="select-none text-gray-700" x-text="heading.value"></div>
+                                                                </label>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-white overflow-auto w-full rounded-lg shadow relative"
+                                             style="height: 405px;">
+                                            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+                                                <thead>
+                                                <tr class="text-left">
+                                                    <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+                                                    </th>
+                                                    <template x-for="heading in headings">
+                                                        <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs"
+                                                            x-text="heading.value" :x-ref="heading.key" :class="{ [heading.key]: true }"></th>
+                                                    </template>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <template x-for="user in users" :key="user.userId">
+                                                    <tr>
+                                                        <td class="border-dashed border-t border-gray-200 px-3">
+                                                        </td>
+                                                        <td class="border-dashed border-t border-gray-200 userId">
+                                                            <span class="text-gray-700 px-6 py-3 flex items-center" x-text="user.userId"></span>
+                                                        </td>
+                                                        <td class="border-dashed border-t border-gray-200 firstName">
+                                                            <span class="text-gray-700 px-6 py-3 flex items-center" x-text="user.firstName"></span>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="flex justify-end pt-2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Modal -->
+                </div>
+                <div id="salon" class="flex md:justify-end w-full md:w-1/2 -mt-5">
+                    <div class="bg-dots">
+                        <div class="shadow-2xl max-w-md z-10 rounded-full mt-6 ml-4">
+                            <img alt="card img" class="rounded-t" src="https://c1.wallpaperflare.com/preview/52/3/809/artist-tattoo-creative-tattooist.jpg">
+                            <div class="text-2xl p-10 bg-white"><img alt="quote" class="float-left mr-1" src="https://assets-global.website-files.com/5b5a66e9f3166b36708705fa/5cf8fb1f994fb7168d0d66fb_quote-intro.svg"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+                        </div>
+                    </div>
+                </divsalon>
+            </div>
+        </div>
+        </div>
+        <div id="tatoo"></div>
+    </section>
+
+    <!-- hero componant -->
+
+    <!-- Tatoo section -->
+    <section class="bg-yellow-50 p-10">
+        <div class="container mx-auto">
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="text-center">
+                        <h2 class="2xl:text-7xl text-4xl  tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none">
+                            Infor<span class="text-btnBack">mation</span>
+                        </h2>
+                        <h3 class='text-5xl mt-10'>Tatouage & Piercing</h3>
+                        <article class="py-12 px-4">
+                            <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Pour un bon Tatouage</h1>
+
+                            <div class="max-w-3xl mx-auto">
+                                <p class="mb-4">We offer a dependable and quick supply of copy paper suited to all kinds of printers. Each of our various products is designed to provide the finest performance and meet international standards.</p>
+                                <p class="mb-4">We’re dedicated to ensure the highest level of customer satisfaction based on long-term professional relationships. By creating the positive working environment we’re enabling our employees to significantly improve not only their productivity, but what’s more important – job satisfaction.</p>
+                                <ul class="mb-4 list-inside list-disc">
+                                    <li>High durability</li>
+                                    <li>Value-based price</li>
+                                    <li>Perfect performance on copy machines</li>
+                                    <li>Long lasting whiteness</li>
+                                </ul>
+                                <p class="mb-10">We deliver our services with passion and dedication unmatched by other so called “big players”. We create a friendly environment for our workers and that’s what makes their dedication soar to the maximum. You are getting not only the best possible product, but also our love for paper (completely free of charge).</p>
+                                <hr>
+                            </div>
+                        </article>
+                        <article class="py-12 px-4">
+                            <h1 class="text-4xl text-center mb-4 font-semibold font-heading font-semibold">Pour un bon Piercing</h1>
+
+                            <div class="max-w-3xl mx-auto">
+                                <p class="mb-4">We offer a dependable and quick supply of copy paper suited to all kinds of printers. Each of our various products is designed to provide the finest performance and meet international standards.</p>
+                                <p class="mb-4">We’re dedicated to ensure the highest level of customer satisfaction based on long-term professional relationships. By creating the positive working environment we’re enabling our employees to significantly improve not only their productivity, but what’s more important – job satisfaction.</p>
+                                <ul class="mb-4 list-inside list-disc">
+                                    <li>High durability</li>
+                                    <li>Value-based price</li>
+                                    <li>Perfect performance on copy machines</li>
+                                    <li>Long lasting whiteness</li>
+                                </ul>
+                                <p id="rea" class="mb-10">We deliver our services with passion and dedication unmatched by other so called “big players”. We create a friendly environment for our workers and that’s what makes their dedication soar to the maximum. You are getting not only the best possible product, but also our love for paper (completely free of charge).</p>
+                                <hr>
+                            </div>
+                        </article>
+                    </div>
+                    </div>
+                </div>
+    </section>
+    <!-- Tatoo section -->
+
+    <!-- slider -->
+    <section class="bg-yellow-50 pb-20">
+        <h1 class="text-center text-3xl text-textC">Les Réalisations</h1>
+        <div x-data="{swiper: null}"
+             x-init="swiper = new Swiper($refs.container, {
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 0,
+
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 0,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 0,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 0,
+        },
+      },
+    })"
+             class="relative w-10/12 mx-auto flex flex-row"
+        >
+            <div class="absolute inset-y-0 left-0 z-10 flex items-center">
+                <button @click="swiper.slidePrev()"
+                        class="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-left w-6 h-6"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+
+            <div class="swiper-container" x-ref="container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+
+                    {% for rea in Realisation %}
+
+                    <div class="swiper-slide p-4">
+                        <div class="flex flex-col rounded shadow overflow-hidden">
+                            <div class="flex-shrink-0">
+                                <img id="myImg{{ rea.id }}" class="h-48 w-full object-cover" onclick="Carou({{ rea.id }})" src="uploads/rea/{{ rea.image }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+            <div class="absolute inset-y-0 right-0 z-10 flex items-center">
+                <button @click="swiper.slideNext()"
+                        class="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="chevron-right w-6 h-6"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
+        <p class="text-center text-textC">Clicker deux fois pour voir l'image en grand</p>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
+
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img">
+
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
+    </section>
+    <!-- end slider -->
+
+    <!-- contact Form -->
+    <div id="contact"></div>
+    <div class="flex items-top bg-nav-light justify-center h-3/4 pb-10 sm:items-center sm:pt-0">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mt-8 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-6 mr-2 bg-nav-original sm:rounded-lg">
+                        <h1 class="text-4xl sm:text-5xl text-gray-800 dark:text-white font-extrabold tracking-tight">
+                            Contactez-nous !
+                        </h1>
+                        <p class="text-normal text-lg sm:text-2xl font-medium text-gray-600 dark:text-gray-400 mt-2">
+
+                        </p>
+
+                        <div class="flex items-center mt-8 text-gray-600 dark:text-gray-400">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <div class="ml-4 text-md tracking-wide font-semibold w-40">
+                                7 rue tramezaygues, 31440 Cierp-Gaud
+                            </div>
+                        </div>
+
+                        <div class="flex items-center mt-4 text-gray-600 dark:text-gray-400">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            <div class="ml-4 text-md tracking-wide font-semibold w-40">
+                                06 88 36 26 45
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex flex-col justify-center">
+                        {{ form_start(form) }}
+                        <div class="flex flex-col">
+                            <label for="name" class="hidden">Votre Nom et Prénom</label>
+                            {{ form_widget(form.nom, {'attr': {'class': 'w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none' ,
+                                'placeholder': 'Votre Nom et Prenom' }}) }}
+                        </div>
+
+                        <div class="flex flex-col mt-2">
+                            <label for="email" class="hidden">Email</label>
+                            {{ form_widget(form.mail, {'attr': {'class': 'w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700
+                            text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none' ,
+                                'placeholder': 'Votre Addresse Mail' }}) }}
+                        </div>
+
+                        <div class="flex flex-col mt-2">
+                            <label for="tel" class="hidden">Number</label>
+                            {{ form_widget(form.telephone, {'attr': {'class': 'w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400
+                            dark:border-gray-700 text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none' ,
+                                'placeholder': 'Votre numéro de téléphone' }}) }}
+                        </div>
+
+                        <div class="flex flex-col mt-2">
+                            <label for="tel" class="hidden">Message</label>
+                            {{ form_widget(form.message, {'attr': {'class': 'w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700
+                            text-gray-800 font-semibold focus:border-indigo-500 focus:outline-none' ,
+                                'placeholder': 'Votre question' }}) }}
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="6LeK0TIaAAAAAOIgOc3JdsxWYhUpiG9Thq6syIvp"></div>
+
+                        <button type="submit" class="md:w-32 bg-nav-original hover:bg-btnBack hover:text-white text-textC font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
+                            Envoyer
+                        </button>
+                        {% if checker != "" %}
+                            {{ checker }}
+                        {% endif %}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact Form -->
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script>
+
+        function Carou(i){
+            var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById("myImg"+i);
+            var modalImg = document.getElementById("img");
+            var captionText = document.getElementById("caption");
+            img.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+// Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            console.log('dqsd' + i)
+        }
+
+
+        function datatables() {
+            return {
+                headings: [
+                    {
+                        'key': 'firstName',
+                        'value': 'Piercing'
+                    },
+                    {
+                        'key': 'userId',
+                        'value': 'prix'
+                    }
+                ],
+                users: [
+                    {
+                    "userId": "Lobes",
+                    "firstName": "1 : 30€ / 2 : 50€ ",
+                },{
+                        "userId": "Cartilage (Conch ,snug ,hélix ,rooth ,tragus ,daith anti tragus, anti hélix  )",
+                        "firstName": "1 : 40€ / 2 : 70€",
+                    },
+                    {
+                        "userId": "Industriel",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Langue",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Labret ,medusa ,Monroe",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Ashley , Dahlia Bites ,vertical labret ,snake Bites ," +
+                            "angle bites, cyber bites",
+                        "firstName": "90€",
+                    },
+                    {
+                        "userId": "Arcade",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Nez",
+                        "firstName": "1 : 45€ / 2 : 80€",
+                    },
+                    {
+                        "userId": "Septum",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Nombril",
+                        "firstName": "50€",
+                    },
+                    {
+                        "userId": "Teton homme",
+                        "firstName": "1 : 70€ / 2 : 120€ ",
+                    },
+                    {
+                        "userId": "Teton femme",
+                        "firstName": "1 : 60€ / 2 : 110€ ",
+                    },
+                    {
+                        "userId": "Microdermal",
+                        "firstName": "85€",
+                    }, {
+                        "userId": "Surface",
+                        "firstName": "60€",
+                    },
+
+                ],
+                selectedRows: [],
+
+                open: false,
+
+                toggleColumn(key) {
+                    // Note: All td must have the same class name as the headings key!
+                    let columns = document.querySelectorAll('.' + key);
+
+                    if (this.$refs[key].classList.contains('hidden') && this.$refs[key].classList.contains(key)) {
+                        columns.forEach(column => {
+                            column.classList.remove('hidden');
+                        });
+                    } else {
+                        columns.forEach(column => {
+                            column.classList.add('hidden');
+                        });
+                    }
+                },
+
+                getRowDetail($event, id) {
+                    let rows = this.selectedRows;
+
+                    if (rows.includes(id)) {
+                        let index = rows.indexOf(id);
+                        rows.splice(index, 1);
+                    } else {
+                        rows.push(id);
+                    }
+                },
+
+                selectAllCheckbox($event) {
+                    let columns = document.querySelectorAll('.rowCheckbox');
+
+                    this.selectedRows = [];
+
+                    if ($event.target.checked == true) {
+                        columns.forEach(column => {
+                            column.checked = true
+                            this.selectedRows.push(parseInt(column.name))
+                        });
+                    } else {
+                        columns.forEach(column => {
+                            column.checked = false
+                        });
+                        this.selectedRows = [];
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        const modal = document.querySelector('.main-modal');
+        const closeButton = document.querySelectorAll('.modal-close');
+
+        const modalClose = () => {
+            modal.classList.remove('fadeIn');
+            modal.classList.add('fadeOut');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 500);
+        }
+
+        const openModal = () => {
+            modal.classList.remove('fadeOut');
+            modal.classList.add('fadeIn');
+            modal.style.display = 'flex';
+        }
+
+        for (let i = 0; i < closeButton.length; i++) {
+
+            const elements = closeButton[i];
+
+            elements.onclick = (e) => modalClose();
+
+            modal.style.display = 'none';
+
+            window.onclick = function (event) {
+                if (event.target == modal) modalClose();
+            }
+        }
+    </script>
+{% endblock %}

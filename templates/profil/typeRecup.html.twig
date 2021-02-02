@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+    </style>
+
+    <!-- Profil -->
+    <section>
+        <div class="-mt-4">
+            {% include('profil.html.twig') %}
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                    <div class="flex items-center">
+                        <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                    <div class="container mx-auto px-6 py-8">
+                        <h3 class="text-gray-700 text-3xl font-medium">Choisir une méthode de récupération de votre produit.</h3>
+
+                        <div class="mt-4 bg-white rounded">
+                            <div class="container mx-auto text-center">
+                                <article class="py-12 px-4 ml-4">
+                                    <h1 class="text-2xl text-center mb-4 font-semibold font-heading font-semibold">Bienvenue {{ app.user.username }}</h1>
+
+                                    <div class="max-w-3xl mx-auto">
+                                        <div class="flex flex-wrap justify-between">
+                                            <a href="{{ path('profil_toSalon', {"id": achat.id }) }}" class="mt-1 px-5 py-2 border-vert border text-vert rounded
+                                                        transition
+                                                        duration-300
+                                                        hover:bg-vert
+                                                        hover:text-white focus:outline-none">Venir au salon !</a>
+                                            <a href="{{ path('profil_livrer', {"id": achat.id }) }}" class="mt-1 px-5 py-2 border-indigo-500 border text-indigo-500 rounded
+                                                        transition
+                                                        duration-300
+                                                        hover:bg-indigo-700
+                                                        hover:text-white focus:outline-none">Être livré chez sois !</a>
+                                        </div>
+                                        <div class="mb-4 list-inside list-disc">
+                                                    <div class="m-5 bg-yellow-100 rounded-2xl">
+                                                        <img class="mx-auto pt-4" src="/uploads/products/{{ achat.LeProduit.image }}" width="17%" height="80px" alt="">
+                                                        <p class="pt-2">
+                                                            Date de l'achat : {{ achat.DateAchat|date('d/m/Y H:i:s') }}
+                                                        </p>
+                                                        <hr>
+                                                        <p>
+                                                            prix : {{ achat  }} €
+                                                        </p>
+                                                        <hr>
+                                                        <p>
+                                                            Description de l'achat : {{ achat.LeProduit.nom }}
+                                                        </p>
+                                                        <hr>
+                                                        <p class="break-words pb-5">
+                                                            Numéro de l'achat : {{ achat.idCommande }}
+                                                        </p>
+                                                    </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}

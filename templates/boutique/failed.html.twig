@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block body %}
+
+
+    <!-- Header with image -->
+    <section class="w-full mt-16">
+        <div class="w-full  bg-gray-500 bg-no-repeat" style="
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-image: url('https://www.anneaux-elfiques.com/images/categories/image-categorie-bijoux-cinema.jpg');
+">
+            <div class=" p-10  py-20  flex  flex-col  flex-wrap  justify-center  content-center">
+                <div class=" m-0  p-0  text-5xl  text-white  antialiased  text-center">Erreur lors du paiement!</div>
+                <div class=" m-0  p-0  text-xl  text-white  antialiased  text-center"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Header with image -->
+
+    <!-- CategorieBar with Product -->
+    <section>
+        <div class="bg-white mb-36">
+            <main class="my-8">
+                <div class="container mx-auto px-6">
+                    <div class="md:flex md:items-center">
+                        <div class="w-full h-64 md:w-1/2 lg:h-96">
+                            <img class="h-full w-full rounded-md object-cover max-w-lg mx-auto" src="/uploads/products/{{ products.image }}" alt="{{ products.nom }}">
+                        </div>
+                        <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+                            <h3 class="text-gray-700 uppercase text-lg">{{ products.nom }}</h3>
+                            <span class="text-gray-500 mt-3">{{ products.prix }} €</span>
+                            <hr class="my-3">
+                            <div class="mt-2">
+                                <label class="text-gray-700 text-lg" for="count">description  de produit : </label>
+                                <div class="flex items-center mt-1">
+                                    <span class="text-gray-700 text-sm mx-2">{{ products.description }}</span>
+                                </div>
+                                <label class="text-gray-700 text-sm" for="count">Quantité : </label>
+                                <div class="flex items-center mt-1">
+                                    <span class="text-gray-700 text-lg mx-2">{{ products.quantite }} restant.</span>
+                                </div>
+                            </div>
+                                <p class="text-3xl mt-4 mb-5">Erreur lors du paiement veuillez réessayer plus tard !</p>
+                            <a class=" px-5 py-2 border-indigo-500 border text-indigo-500 rounded
+                                                        transition
+                                                        duration-300
+                                                        hover:bg-indigo-700
+                                                        hover:text-white focus:outline-none" href="{{ path("boutique") }}">retour à la boutique</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </section>
+    <!-- CategorieBar with Product -->
+    {% if app.user %}
+    {% endif %}
+
+{% endblock %}

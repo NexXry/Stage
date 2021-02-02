@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+        @media screen and (max-width: 640px) {
+            input[type='file'] {
+                color: transparent;
+                margin-left: 11%;
+            }
+        }
+    </style>
+    <section>
+        <div class="-mt-4">
+            {% include('backOffice.html.twig') %}
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                    <div class="flex items-center">
+                        <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                    <div class="container mx-auto px-6 py-8">
+                        <h3 class="text-gray-700 text-3xl font-medium">Gestion des Produits.</h3>
+
+                        <div class="mt-4 bg-white rounded">
+                            <div class="container mx-auto text-center">
+                                <article class="py-12 px-4 ml-4">
+                                    <h1 class="text-2xl text-center mb-4 font-semibold font-heading font-semibold"></h1>
+                                    <hr>
+                                    <div class="container w-8/12 mx-auto">
+                                        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
+                                            <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+                                                <table class="min-w-full">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Nom</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Prix</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">quantité</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">description</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Modifier</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="bg-white mt-1">
+                                                    {% if produits is not empty %}
+                                                        {% for prod in produits %}
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                                    <div class="text-sm leading-5 text-blue-900">{{ prod
+                                                                        .nom }} </div>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ prod.prix }}</td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ prod.quantite }}</td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ prod.description }}</td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                                                                    <div class="flex items-end justify-end">
+                                                                        <a href="{{ path("back_office_produitDel",{"id": prod.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4
+                                                            hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                            <i class="far fa-trash-alt"></i>
+                                                                        </a>
+                                                                        <a href="{{ path("back_office_ajout_produitMod",{"id": prod.id}) }}" class="p-2 rounded-full bg-indigo-400 text-white
+                                                            mx-1 -mb-4 hover:bg-btnBack focus:outline-none
+                                                            focus:bg-blue-500">
+                                                                            <i class="far fa-edit"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                        {% endfor %}
+                                                        <a href="{{ path('back_office') }}" class="px-5 py-2 border-blue-500 border text-indigo-500 rounded
+                                                        transition duration-300 hover:bg-indigo-500
+                                                         hover:text-white focus:outline-none">Produit en vente</a>
+                                                    {% else %}
+                                                        <p>Aucun rendez-vous pour le moment</p>
+                                                    {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}

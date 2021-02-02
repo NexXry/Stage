@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+        @media screen and (max-width: 640px) {
+            input[type='file'] {
+                color: transparent;
+                margin-left: 11%;
+            }
+        }
+    </style>
+    <section>
+        <div class="-mt-4">
+            {% include('backOffice.html.twig') %}
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-nav-light">
+                    <div class="flex items-center">
+                        <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                    <div class="container mx-auto px-6 py-8">
+                        <h3 class="text-gray-700 text-3xl font-medium">Gestion des achats.</h3>
+
+                        <div class="mt-4 bg-white rounded">
+                            <div class="container mx-auto text-center">
+                                <article class="py-12 px-4 ml-4">
+                                    <h1 class="text-2xl text-center mb-4 font-semibold font-heading font-semibold"></h1>
+                                    <hr>
+                                    <div class="container w-8/12 mx-auto">
+                                        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
+                                            <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+                                                <table class="min-w-full">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Client</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Mail</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Téléphone</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Status</th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Date Achats
+                                                        </th>
+                                                        <th class="px-6 py-3 border-b-2 border-gray-300"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="bg-white mt-1">
+                                                    {% if achats is not empty %}
+                                                        {% for achat in achats %}
+                                                            {% if achat.Recu != 'recu' %}
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+                                                                    <div class="text-sm leading-5 text-blue-900">{{ achat.LeUtilisateur
+                                                                        .nom }} {{ achat.LeUtilisateur
+                                                                        .prenom }}</div>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ achat.LeUtilisateur
+                                                                    .mail }}</td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{ achat.LeUtilisateur
+                                                                    .telephone }}</td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                        <span class="relative {% if achat.Recu == "recu" or achat.Recu == "livrer"  %} text-indigo-600 {% else %} text-rouge {% endif %}  text-xs">{% if achat.Recu ==
+                                                "recu" %} Donner {%
+                                                elseif achat.Recu == "livrer" %}
+                                           A envoyer {% else%} Au salon {% endif %}</span>
+                                    </span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{{ achat.DateAchat|date
+                                                                        ('d/m/Y H:i:s') }}</td>
+                                                                <td class="px-6 py-4 flex flex-col whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                                                                    <a href="{{ path('back_office_donner', {"id": achat.id }) }}" class="mt-1 px-5 py-2 border-indigo-500 border text-indigo-500 rounded
+                                                        transition
+                                                        duration-300
+                                                        hover:bg-indigo-700
+                                                        hover:text-white focus:outline-none">Donner</a>
+                                                                    <a href="{{ path('back_office_livrer', {"id": achat.id }) }}" class="mt-1 px-5 py-2 border-vert border text-vert rounded
+                                                        transition duration-300 hover:bg-vert
+                                                         hover:text-white focus:outline-none">Expédier</a>
+                                                                    <a href="{{ path('back_office_salon', {"id": achat.id }) }}" class="mt-1 px-5 py-2 border-blue-500 border text-red-500 rounded
+                                                        transition duration-300 hover:bg-rouge
+                                                         hover:text-white focus:outline-none">Au salon</a>
+                                                                </td>
+                                                            </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <p class="text-rouge m-4">Une fois le produit "Donner" il est archivé !</p>
+                                                        <a href="{{ path('back_office_gestion_archive') }}" class="px-5 py-2 border-blue-500 border text-indigo-500 rounded
+                                                        transition duration-300 hover:bg-indigo-500
+                                                         hover:text-white focus:outline-none">Tous les achats(Archive)</a>
+                                                    {% else %}
+                                                        <p>Aucun rendez-vous pour le moment</p>
+                                                    {% endif %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        </div>
+    </section>
+{% endblock %}
